@@ -18,9 +18,9 @@ import numpy as np
 from datetime import datetime
 
 with h5py.File(path_of_file, 'r') as hf:
-    x = hf['x'][()]                # Shape = [n_samples, 1, n_features]
-    y = hf['y'][()].squeeze()      # Shape = [n_samples, 1]
-    t = hf['timestamp'][()]        # Shape = [n_samples,]
+    x = np.array(hf['x'])                # Shape = [n_samples, 1, n_features]
+    y = np.array(hf['y'])                # Shape = [n_samples, 1]
+    t = np.array(hf['timestamp'])        # Shape = [n_samples,]
 
 # t 为 epoch 表示 (从 0001-01-01 开始的 ns 数, int64)，如有需要可以做如下转换到 datetime ：
 
@@ -44,4 +44,3 @@ def to_datetime(t: np.int64) -> datetime:
 连接字符串：
 
     DefaultEndpointsProtocol=https;AccountName=jaytmp;AccountKey=aAAu+WRh8RNFnCzmKRniPtsjFO394C9GtdGTrv/ZbrPugP3FWTWe7SEIlQZEld8rxEQ2CsmAE2FaomFCxlRZ+w==;EndpointSuffix=core.windows.net
-
